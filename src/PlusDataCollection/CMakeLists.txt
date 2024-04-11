@@ -2753,6 +2753,10 @@ IF(PLUS_USE_AMFITRACK)
     ${AMFITRACK_INCLUDE_DIRS}/output/Amfitrack_API.lib
     ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/hidapi.lib
     )
+
+    LIST(APPEND External_Libraries_Install
+      ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/hidapi.dll
+      )
 ENDIF()
 
 # --------------------------------------------------------------------------
