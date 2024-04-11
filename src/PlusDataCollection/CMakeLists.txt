@@ -60,6 +60,7 @@ OPTION(PLUS_USE_INFRARED_TEEV2_CAM "Provide support for capturing an Infrared Th
 OPTION(PLUS_USE_ULTRAVIOLET_PCOUV_CAM "Provide support for capturing an PCO Ultraviolet Camera capture stream" OFF)
 OPTION(PLUS_USE_DAQVIDEOSOURCE "Provide support for capturing an CameraLink Camera using DAQ System USB3-FRM13-B Grabber"  OFF)
 OPTION(PLUS_USE_WITMOTIONTRACKER "Provide support for the WitMotion class of inertial measurement units" OFF)
+OPTION(PLUS_USE_AMFITRACK "Provide support for AMFITRACK 6DOF tracking" ON)
 
 OPTION(PLUS_USE_LEAPMOTION "Provide support for the LeapMotion hand tracker" OFF)
 IF(PLUS_USE_LEAPMOTION)
@@ -2721,6 +2722,37 @@ IF(PLUS_USE_REVOPOINT3DCAMERA)
     ${REVOPOINT3DSDK_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}3DCamera${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${REVOPOINT3DSDK_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}HandEye${CMAKE_SHARED_LIBRARY_SUFFIX}
   )
+ENDIF()
+
+# --------------------------------------------------------------------------
+# AMFITRACK
+IF(PLUS_USE_AMFITRACK)
+  SET(AMFITRACK_SRCS
+    AmfitrackTracker/vtkPlusAMFITRACKSource.cxx
+    )
+  IF(MSVC OR ${CMAKE_GENERATOR} MATCHES "Xcode")
+    SET(AMFITRACK_HDRS
+      AmfitrackTracker/vtkPlusAMFITRACKSource.h
+      )
+  ENDIF()
+
+  LIST(APPEND ${PROJECT_NAME}_HDRS
+    ${AMFITRACK_HDRS}
+    )
+
+  LIST(APPEND ${PROJECT_NAME}_SRCS
+    ${AMFITRACK_SRCS}
+    )
+
+  LIST(APPEND ${PROJECT_NAME}_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/AmfitrackTracker
+    ${AMFITRACK_INCLUDE_DIRS}
+    )
+
+  LIST(APPEND ${PROJECT_NAME}_LIBS
+    ${AMFITRACK_INCLUDE_DIRS}/output/Amfitrack_API.lib
+    ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/hidapi.lib
+    )
 ENDIF()
 
 # --------------------------------------------------------------------------

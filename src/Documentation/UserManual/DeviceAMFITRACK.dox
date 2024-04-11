@@ -1,0 +1,27 @@
+/*!
+\page DeviceAMFITRACK 
+
+\section AMFITRACK Supported platforms
+
+- \ref PackageWin64
+
+\section AMFITRACK hardware configuration
+To configure the AMFITRACK devices, use the AMFITRACK Viewer, which can be downloaded from: <a href="https://www.amfitrack.com/download">. The AMFITRACK Viewer can set the sample-rate and more advanced feature.
+
+\section AMFITRACKConfigSettings Device configuration settings
+
+- \xmlAtt \ref DeviceType "Type" = \c "AMFITRACKTracker" \RequiredAtt
+- \xmlAtt \ref ToolReferenceFrame \OptionalAtt{Tracker}
+
+- \xmlElem \ref DataSources
+  - \xmlElem \ref DataSource there must be one child tool element \RequiredAtt
+    - \xmlAtt \b Type = \c "Tool" \RequiredAtt
+    - \xmlAtt \b Id A string that identifies the tool element. \RequiredAtt
+    - \xmlAtt \ref PortName Must be the device ID of one the sensor connected (The device ID can be found in AMFITRACK Viewer) \RequiredAtt
+    - \xmlAtt \ref UnityCoordinateSystem Set to true if want to use Unity Left handed and Y+ up. \OptionalAtt{false}
+
+\section AMFITRACKExampleConfigFile Example configuration file PlusDeviceSet_Server_AMFITRACK.xml
+
+\include "ConfigFiles/PlusDeviceSet_Server_AMFITRACK.xml"
+    
+*/

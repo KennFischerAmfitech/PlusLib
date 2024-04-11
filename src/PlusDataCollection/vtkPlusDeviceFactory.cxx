@@ -96,6 +96,9 @@ See License.txt for details.
 #ifdef PLUS_USE_PICOSCOPE
 #include "vtkPlusPicoScopeDataSource.h"
 #endif
+#ifdef PLUS_USE_AMFITRACK
+#include "vtkPlusAMFITRACKSource.h"
+#endif
 
 //----------------------------------------------------------------------------
 // Video sources
@@ -466,6 +469,10 @@ RegisterDevice("GenericSensor", "vtkPlusGenericSensorTracker", (PointerToDevice)
 
 #ifdef PLUS_USE_REVOPOINT3DCAMERA
     RegisterDevice("Revopoint3DCamera", "vtkPlusRevopoint3DCamera", (PointerToDevice)& vtkPlusRevopoint3DCamera::New);
+#endif
+
+#ifdef PLUS_USE_AMFITRACK
+    RegisterDevice("AMFITRACKTracker", "vtkPlusAMFITRACKSource", (PointerToDevice)&vtkPlusAMFITRACKSource::New);
 #endif
 
     // Virtual Devices
