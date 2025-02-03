@@ -2736,6 +2736,12 @@ IF(PLUS_USE_AMFITRACK)
       )
   ENDIF()
 
+  IF(CMAKE_SIZEOF_VOID_P EQUAL 8)
+    SET(Bitness "x64")
+  ELSE()
+    MESSAGE(ERROR "PLUS_USE_AMFITRACK Does not support x32")
+  ENDIF()
+
   LIST(APPEND ${PROJECT_NAME}_HDRS
     ${AMFITRACK_HDRS}
     )
@@ -2750,12 +2756,12 @@ IF(PLUS_USE_AMFITRACK)
     )
 
   LIST(APPEND ${PROJECT_NAME}_LIBS
-    ${AMFITRACK_INCLUDE_DIRS}/output/Amfitrack_API.lib
-    ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/hidapi.lib
+    ${AMFITRACK_INCLUDE_DIRS}/output/MSVC/${Bitness}/Amfitrack_API.lib
+    ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/${Bitness}/hidapi.lib
     )
 
     LIST(APPEND External_Libraries_Install
-      ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/hidapi.dll
+      ${AMFITRACK_INCLUDE_DIRS}/lib/hidapi/${Bitness}/hidapi.dll
       )
 ENDIF()
 
